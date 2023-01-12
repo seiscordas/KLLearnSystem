@@ -2,13 +2,11 @@ package br.com.klsites.kllearnsystem.entities;
 
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
+@Entity
 @Table(name = "tb_role")
 public class Role implements Serializable {
     private static final long serialVersionUID = 1L;
