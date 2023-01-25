@@ -1,14 +1,18 @@
 package br.com.klsites.kllearnsystem.entities;
 
-import lombok.Data;
+import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
-
-@Data
+@Getter
+@Setter
 @Entity
+@RequiredArgsConstructor
+@AllArgsConstructor
 @Table(name = "tb_section")
 public class Section implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,16 +30,18 @@ public class Section implements Serializable {
     @JoinColumn(name = "prerequisite_id")
     private Section prerequisite;
 
-    public Section() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Section section = (Section) o;
+
+        return id.equals(section.id);
     }
 
-    public Section(Long id, String title, String description, Integer position, String imgUri, Resource resource, Section prerequisite) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.position = position;
-        this.imgUri = imgUri;
-        this.resource = resource;
-        this.prerequisite = prerequisite;
+    @Override
+    public int hashCode() {
+        return id.hashCode();
     }
 }

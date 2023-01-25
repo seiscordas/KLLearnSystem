@@ -1,25 +1,30 @@
 package br.com.klsites.kllearnsystem.entities;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
-import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tb_offer")
 public class Offer implements Serializable {
+    @Serial
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String edition;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant startMoment;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant endMoment;
 
     @Setter(AccessLevel.NONE)
@@ -30,9 +35,6 @@ public class Offer implements Serializable {
     @Setter(AccessLevel.NONE)
     @OneToMany(targetEntity=Resource.class, mappedBy="offer", fetch=FetchType.EAGER)
     private List<Resource> resources = new ArrayList<>();
-
-    public Offer() {
-    }
 
     public Offer(Long id, String edition, Instant startMoment, Instant endMoment, Course course) {
         this.id = id;
