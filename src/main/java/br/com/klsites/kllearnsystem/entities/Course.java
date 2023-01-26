@@ -1,10 +1,7 @@
 package br.com.klsites.kllearnsystem.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -13,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "tb_course")
@@ -26,8 +23,8 @@ public class Course implements Serializable {
     private String name;
     private String imgUri;
     private String imgGrayUri;
-
-    @OneToMany(targetEntity=Offer.class, mappedBy="course", fetch= FetchType.EAGER)
+    @Setter(AccessLevel.NONE)
+    @OneToMany(mappedBy = "course")
     private List<Offer> offers = new ArrayList<>();
 
     public Course(Long id, String name, String imgUri, String imgGrayUri) {

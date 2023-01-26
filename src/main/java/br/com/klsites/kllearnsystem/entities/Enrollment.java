@@ -1,22 +1,18 @@
 package br.com.klsites.kllearnsystem.entities;
 
+import br.com.klsites.kllearnsystem.Deliver;
 import br.com.klsites.kllearnsystem.entities.pk.EnrollmentPK;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_enrollment")
 public class Enrollment implements Serializable {
@@ -34,6 +30,9 @@ public class Enrollment implements Serializable {
     @Setter(AccessLevel.NONE)
     @ManyToMany(mappedBy = "enrollmentsDone")
     private Set<Lesson> lessonsDone = new HashSet<>();
+
+    @OneToMany(mappedBy = "enrollment")
+    private List<Deliver> deliveries = new ArrayList<>();
 
     public Enrollment(User user, Offer offer, Instant enrollMoment, Instant refundMoment, boolean available, boolean onlyUpdate) {
         id.setUser(user);

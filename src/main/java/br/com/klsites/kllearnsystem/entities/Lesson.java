@@ -1,5 +1,6 @@
 package br.com.klsites.kllearnsystem.entities;
 
+import br.com.klsites.kllearnsystem.Deliver;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -8,11 +9,13 @@ import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
 @Table(name = "tb_lesson")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -28,6 +31,9 @@ public abstract class Lesson implements Serializable {
     @ManyToOne
     @JoinColumn(name = "section_id")
     private Section section;
+
+    @OneToMany(mappedBy = "lesson")
+    private List<Deliver> deliveries = new ArrayList<>();
 
     @Setter(AccessLevel.NONE)
     @ManyToMany()

@@ -10,8 +10,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
-@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable {
@@ -23,6 +22,7 @@ public class User implements Serializable {
     private String name;
     private String email;
     private String password;
+
     @Setter(AccessLevel.NONE)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -31,6 +31,13 @@ public class User implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
+
+    public User(Long id, String name, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 
     @Override
     public boolean equals(Object o) {
