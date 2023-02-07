@@ -1,6 +1,5 @@
 package br.com.klsites.kllearnsystem.entities;
 
-import br.com.klsites.kllearnsystem.Deliver;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

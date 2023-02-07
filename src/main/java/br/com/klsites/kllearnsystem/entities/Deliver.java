@@ -1,7 +1,5 @@
-package br.com.klsites.kllearnsystem;
+package br.com.klsites.kllearnsystem.entities;
 
-import br.com.klsites.kllearnsystem.entities.Enrollment;
-import br.com.klsites.kllearnsystem.entities.Lesson;
 import br.com.klsites.kllearnsystem.entities.enums.DeliverStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
